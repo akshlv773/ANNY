@@ -6,760 +6,793 @@
 <title>Ananya's Magic Mirror 💌</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Noto+Sans+Gujarati:wght@400;600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
-:root {
---rose: #c2185b;
---rose-light: #f48fb1;
---rose-pale: #fce4ec;
---rose-deep: #880e4f;
---gold: #d4a017;
---gold-light: #f5e6c8;
---cream: #fff8f0;
---text: #3a1a2e;
---text-muted: #7a4a62;
---glass: rgba(255,255,255,0.55);
---glass-border: rgba(255,192,203,0.45);
---font-display: 'Playfair Display', serif;
---font-body: 'Cormorant Garamond', serif;
---font-ui: 'DM Sans', sans-serif;
---font-gu: 'Noto Sans Gujarati', sans-serif;
-}
+  :root {
+    --rose: #c2185b;
+    --rose-light: #f48fb1;
+    --rose-pale: #fce4ec;
+    --rose-deep: #880e4f;
+    --gold: #d4a017;
+    --gold-light: #f5e6c8;
+    --cream: #fff8f0;
+    --text: #3a1a2e;
+    --text-muted: #7a4a62;
+    --glass: rgba(255,255,255,0.55);
+    --glass-border: rgba(255,192,203,0.45);
+    --font-display: 'Playfair Display', serif;
+    --font-body: 'Cormorant Garamond', serif;
+    --font-ui: 'DM Sans', sans-serif;
+    --font-gu: 'Noto Sans Gujarati', sans-serif;
+  }
 
-* { box-sizing: border-box; margin: 0; padding: 0; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
 
-body {
-font-family: var(--font-body);
-min-height: 100vh;
-background: #1a0a12;
-overflow-x: hidden;
-position: relative;
-display: flex;
-flex-direction: column;
-align-items: center;
-}
+  body {
+    font-family: var(--font-body);
+    min-height: 100vh;
+    background: #1a0a12;
+    overflow-x: hidden;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: background 0.4s ease;
+  }
 
-/* === BACKGROUND CANVAS === */
-#bg-canvas {
-position: fixed;
-inset: 0;
-z-index: 0;
-pointer-events: none;
-}
+  /* === BACKGROUND CANVAS === */
+  #bg-canvas {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+  }
 
-/* === ROSE PETALS === */
-.petal {
-position: fixed;
-width: 10px;
-height: 14px;
-border-radius: 80% 0 55% 0;
-background: linear-gradient(135deg, #f48fb1, #c2185b);
-opacity: 0;
-animation: petalFall linear infinite;
-z-index: 1;
-pointer-events: none;
-}
+  /* === ROSE PETALS === */
+  .petal {
+    position: fixed;
+    width: 10px;
+    height: 14px;
+    border-radius: 80% 0 55% 0;
+    background: linear-gradient(135deg, #f48fb1, #c2185b);
+    opacity: 0;
+    animation: petalFall linear infinite;
+    z-index: 1;
+    pointer-events: none;
+  }
 
-@keyframes petalFall {
-0% { transform: translateY(-40px) rotate(0deg); opacity: 0.7; }
-100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
-}
+  @keyframes petalFall {
+    0%   { transform: translateY(-40px) rotate(0deg); opacity: 0.7; }
+    100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
+  }
 
-/* === WRAPPER === */
-.wrapper {
-position: relative;
-z-index: 10;
-width: 100%;
-max-width: 520px;
-padding: 2rem 1.5rem 4rem;
-display: flex;
-flex-direction: column;
-align-items: center;
-gap: 0;
-}
+  /* === WRAPPER === */
+  .wrapper {
+    position: relative;
+    z-index: 10;
+    width: 100%;
+    max-width: 520px;
+    padding: 2.5rem 1.5rem 4rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+  }
 
-/* === HEADER === */
-.header {
-text-align: center;
-margin-bottom: 0.5rem;
-}
+  /* === HEADER === */
+  .header {
+    text-align: center;
+    margin-bottom: 0.5rem;
+    margin-top: 1rem;
+  }
 
-.header .tag {
-font-family: var(--font-ui);
-font-size: 0.7rem;
-letter-spacing: 0.25em;
-text-transform: uppercase;
-color: var(--rose-light);
-margin-bottom: 0.5rem;
-}
+  .header .tag {
+    font-family: var(--font-ui);
+    font-size: 0.7rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--rose-light);
+    margin-bottom: 0.5rem;
+  }
 
-.header h1 {
-font-family: var(--font-display);
-font-style: italic;
-font-size: clamp(2.2rem, 8vw, 3.4rem);
-font-weight: 400;
-color: #fff;
-line-height: 1.1;
-text-shadow: 0 0 40px rgba(244,143,177,0.6);
-margin-bottom: 0.3rem;
-}
+  .header h1 {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: clamp(2.2rem, 8vw, 3.4rem);
+    font-weight: 400;
+    color: #fff;
+    line-height: 1.1;
+    text-shadow: 0 0 40px rgba(244,143,177,0.6);
+    margin-bottom: 0.3rem;
+  }
 
-.header .subtitle {
-font-family: var(--font-body);
-font-style: italic;
-font-size: 1rem;
-color: var(--rose-light);
-opacity: 0.85;
-}
+  .header .subtitle {
+    font-family: var(--font-body);
+    font-style: italic;
+    font-size: 1rem;
+    color: var(--rose-light);
+    opacity: 0.85;
+  }
 
-/* === MIRROR === */
-.mirror-scene {
-position: relative;
-margin: 1.8rem auto 2rem;
-width: 220px;
-height: 280px;
-display: flex;
-align-items: center;
-justify-content: center;
-}
+  /* === MIRROR === */
+  .mirror-scene {
+    position: relative;
+    margin: 1.8rem auto 2rem;
+    width: 220px;
+    height: 280px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+  }
 
-/* Outer ornate frame */
-.mirror-frame {
-position: absolute;
-inset: -18px;
-border-radius: 56% 56% 50% 50% / 60% 60% 45% 45%;
-border: 2.5px solid;
-border-color: var(--gold);
-box-shadow:
-0 0 0 6px rgba(212,160,23,0.12),
-0 0 0 10px rgba(212,160,23,0.06),
-inset 0 0 0 4px rgba(212,160,23,0.08);
-animation: framePulse 5s ease-in-out infinite;
-}
+  /* Outer ornate frame */
+  .mirror-frame {
+    position: absolute;
+    inset: -18px;
+    border-radius: 56% 56% 50% 50% / 60% 60% 45% 45%;
+    border: 2.5px solid;
+    border-color: var(--gold);
+    box-shadow:
+      0 0 0 6px rgba(212,160,23,0.12),
+      0 0 0 10px rgba(212,160,23,0.06),
+      inset 0 0 0 4px rgba(212,160,23,0.08);
+    animation: framePulse 5s ease-in-out infinite;
+  }
 
-@keyframes framePulse {
-0%,100% { box-shadow: 0 0 0 6px rgba(212,160,23,0.12), 0 0 0 10px rgba(212,160,23,0.06), 0 0 30px rgba(244,143,177,0.15), inset 0 0 0 4px rgba(212,160,23,0.08); }
-50% { box-shadow: 0 0 0 6px rgba(212,160,23,0.2), 0 0 0 12px rgba(212,160,23,0.1), 0 0 60px rgba(244,143,177,0.3), inset 0 0 0 4px rgba(212,160,23,0.12); }
-}
+  @keyframes framePulse {
+    0%,100% { box-shadow: 0 0 0 6px rgba(212,160,23,0.12), 0 0 0 10px rgba(212,160,23,0.06), 0 0 30px rgba(244,143,177,0.15), inset 0 0 0 4px rgba(212,160,23,0.08); }
+    50% { box-shadow: 0 0 0 6px rgba(212,160,23,0.2), 0 0 0 12px rgba(212,160,23,0.1), 0 0 60px rgba(244,143,177,0.3), inset 0 0 0 4px rgba(212,160,23,0.12); }
+  }
 
-/* Frame decoration dots */
-.frame-dot {
-position: absolute;
-width: 8px;
-height: 8px;
-border-radius: 50%;
-background: var(--gold);
-box-shadow: 0 0 8px rgba(212,160,23,0.8);
-}
+  /* Frame decoration dots */
+  .frame-dot {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--gold);
+    box-shadow: 0 0 8px rgba(212,160,23,0.8);
+  }
 
-/* Mirror glass */
-.mirror-glass {
-width: 220px;
-height: 280px;
-border-radius: 56% 56% 50% 50% / 60% 60% 45% 45%;
-background: radial-gradient(ellipse at 35% 30%, rgba(255,255,255,0.18) 0%, rgba(255,192,203,0.08) 40%, rgba(30,10,20,0.85) 100%);
-backdrop-filter: blur(4px);
-border: 1.5px solid rgba(255,192,203,0.3);
-position: relative;
-overflow: hidden;
-display: flex;
-align-items: center;
-justify-content: center;
-}
+  /* Mirror glass */
+  .mirror-glass {
+    width: 100%;
+    height: 100%;
+    border-radius: 56% 56% 50% 50% / 60% 60% 45% 45%;
+    background: radial-gradient(ellipse at 35% 30%, rgba(255,255,255,0.18) 0%, rgba(255,192,203,0.08) 40%, rgba(30,10,20,0.85) 100%);
+    backdrop-filter: blur(4px);
+    border: 1.5px solid rgba(255,192,203,0.3);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 
-/* Shimmer effect inside mirror */
-.mirror-glass::before {
-content: '';
-position: absolute;
-top: 10%;
-left: 15%;
-width: 30%;
-height: 55%;
-background: linear-gradient(160deg, rgba(255,255,255,0.18) 0%, transparent 60%);
-border-radius: 50%;
-pointer-events: none;
-}
+  /* Shimmer effect inside mirror */
+  .mirror-glass::before {
+    content: '';
+    position: absolute;
+    top: 10%;
+    left: 15%;
+    width: 30%;
+    height: 55%;
+    background: linear-gradient(160deg, rgba(255,255,255,0.18) 0%, transparent 60%);
+    border-radius: 50%;
+    pointer-events: none;
+  }
 
-.mirror-inner-text {
-font-family: var(--font-display);
-font-style: italic;
-font-size: 1.05rem;
-color: rgba(255,255,255,0.5);
-text-align: center;
-padding: 1rem;
-line-height: 1.5;
-text-shadow: 0 0 10px rgba(244,143,177,0.4);
-pointer-events: none;
-user-select: none;
-transition: opacity 0.5s;
-}
+  .mirror-inner-text {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: 1.05rem;
+    color: rgba(255,255,255,0.5);
+    text-align: center;
+    padding: 1rem;
+    line-height: 1.5;
+    text-shadow: 0 0 10px rgba(244,143,177,0.4);
+    pointer-events: none;
+    user-select: none;
+    transition: opacity 0.5s;
+  }
 
-/* Sparkle stars around mirror */
-.sparkle {
-position: absolute;
-color: var(--gold);
-font-size: 0.7rem;
-animation: sparkleTwink 2.5s ease-in-out infinite;
-opacity: 0.7;
-pointer-events: none;
-}
+  /* Sparkle stars around mirror */
+  .sparkle {
+    position: absolute;
+    color: var(--gold);
+    font-size: 0.7rem;
+    animation: sparkleTwink 2.5s ease-in-out infinite;
+    opacity: 0.7;
+    pointer-events: none;
+  }
 
-@keyframes sparkleTwink {
-0%,100% { opacity: 0.2; transform: scale(0.8); }
-50% { opacity: 1; transform: scale(1.3); }
-}
+  @keyframes sparkleTwink {
+    0%,100% { opacity: 0.2; transform: scale(0.8); }
+    50% { opacity: 1; transform: scale(1.3); }
+  }
 
-/* === GLASS CARD === */
-.card {
-width: 100%;
-background: rgba(255,255,255,0.07);
-border: 1px solid rgba(255,192,203,0.18);
-border-radius: 24px;
-padding: 1.6rem 1.8rem;
-backdrop-filter: blur(16px);
-margin-bottom: 1.2rem;
-}
+  /* === GLASS CARD === */
+  .card {
+    width: 100%;
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,192,203,0.18);
+    border-radius: 24px;
+    padding: 1.6rem 1.8rem;
+    backdrop-filter: blur(16px);
+    margin-bottom: 1.2rem;
+    transition: all 0.3s ease;
+  }
 
-.card-label {
-font-family: var(--font-ui);
-font-size: 0.65rem;
-letter-spacing: 0.2em;
-text-transform: uppercase;
-color: var(--rose-light);
-margin-bottom: 0.8rem;
-opacity: 0.75;
-}
+  .card-label {
+    font-family: var(--font-ui);
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--rose-light);
+    margin-bottom: 0.8rem;
+    opacity: 0.75;
+  }
 
-/* === MOOD PILLS === */
-.mood-grid {
-display: flex;
-flex-wrap: wrap;
-gap: 0.55rem;
-}
+  /* === MOOD PILLS === */
+  .mood-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.55rem;
+  }
 
-.mood-pill {
-font-family: var(--font-ui);
-font-size: 0.78rem;
-padding: 0.45rem 1rem;
-border-radius: 50px;
-border: 1px solid rgba(255,192,203,0.25);
-background: rgba(255,255,255,0.06);
-color: #fff;
-cursor: pointer;
-transition: all 0.3s ease;
-white-space: nowrap;
-user-select: none;
-}
+  .mood-pill {
+    font-family: var(--font-ui);
+    font-size: 0.78rem;
+    padding: 0.45rem 1rem;
+    border-radius: 50px;
+    border: 1px solid rgba(255,192,203,0.25);
+    background: rgba(255,255,255,0.06);
+    color: #fff;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+  }
 
-.mood-pill:hover {
-border-color: var(--rose-light);
-background: rgba(244,143,177,0.15);
-color: var(--rose-light);
-transform: translateY(-1px);
-}
+  .mood-pill:hover {
+    border-color: var(--rose-light);
+    background: rgba(244,143,177,0.15);
+    color: var(--rose-light);
+    transform: translateY(-1px);
+  }
 
-.mood-pill.active {
-background: linear-gradient(135deg, rgba(194,24,91,0.6), rgba(136,14,79,0.5));
-border-color: var(--rose-light);
-color: #fff;
-box-shadow: 0 0 16px rgba(194,24,91,0.4);
-}
+  .mood-pill.active {
+    background: linear-gradient(135deg, rgba(194,24,91,0.6), rgba(136,14,79,0.5));
+    border-color: var(--rose-light);
+    color: #fff;
+    box-shadow: 0 0 16px rgba(194,24,91,0.4);
+  }
 
-/* === LANGUAGE TOGGLE === */
-.lang-row {
-display: flex;
-gap: 0.5rem;
-margin-top: 0.8rem;
-}
+  /* === LANGUAGE TOGGLE === */
+  .lang-row {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 0.8rem;
+    flex-wrap: wrap;
+  }
 
-.lang-btn {
-font-family: var(--font-ui);
-font-size: 0.75rem;
-padding: 0.35rem 0.85rem;
-border-radius: 50px;
-border: 1px solid rgba(255,192,203,0.2);
-background: transparent;
-color: rgba(255,255,255,0.6);
-cursor: pointer;
-transition: all 0.3s;
-}
+  .lang-btn {
+    font-family: var(--font-ui);
+    font-size: 0.75rem;
+    padding: 0.35rem 0.85rem;
+    border-radius: 50px;
+    border: 1px solid rgba(255,192,203,0.2);
+    background: transparent;
+    color: rgba(255,255,255,0.6);
+    cursor: pointer;
+    transition: all 0.3s;
+    -webkit-tap-highlight-color: transparent;
+  }
 
-.lang-btn.active {
-background: rgba(244,143,177,0.2);
-border-color: var(--rose-light);
-color: var(--rose-light);
-}
+  .lang-btn.active {
+    background: rgba(244,143,177,0.2);
+    border-color: var(--rose-light);
+    color: var(--rose-light);
+  }
 
-/* === INPUT AREA === */
-.input-wrap {
-position: relative;
-width: 100%;
-}
+  /* === INPUT AREA === */
+  .input-wrap {
+    position: relative;
+    width: 100%;
+  }
 
-textarea {
-width: 100%;
-background: rgba(255,255,255,0.06);
-border: 1px solid rgba(255,192,203,0.2);
-border-radius: 16px;
-padding: 1rem 1.2rem;
-padding-right: 60px;
-font-family: var(--font-body);
-font-size: 1.05rem;
-color: #fff;
-resize: none;
-min-height: 90px;
-outline: none;
-transition: border-color 0.3s, box-shadow 0.3s;
-line-height: 1.5;
-}
+  textarea {
+    width: 100%;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,192,203,0.2);
+    border-radius: 16px;
+    padding: 1rem 1.2rem;
+    padding-right: 60px;
+    font-family: var(--font-body);
+    font-size: 1.05rem;
+    color: #fff;
+    resize: none;
+    min-height: 90px;
+    outline: none;
+    transition: border-color 0.3s, box-shadow 0.3s, background 0.3s, color 0.3s;
+    line-height: 1.5;
+  }
 
-textarea::placeholder {
-color: rgba(255,192,203,0.4);
-font-style: italic;
-}
+  textarea::placeholder {
+    color: rgba(255,192,203,0.4);
+    font-style: italic;
+  }
 
-textarea:focus {
-border-color: var(--rose-light);
-box-shadow: 0 0 20px rgba(244,143,177,0.15);
-}
+  textarea:focus {
+    border-color: var(--rose-light);
+    box-shadow: 0 0 20px rgba(244,143,177,0.15);
+  }
 
-.send-btn {
-position: absolute;
-right: 12px;
-bottom: 12px;
-width: 42px;
-height: 42px;
-border-radius: 50%;
-background: linear-gradient(135deg, var(--rose), var(--rose-deep));
-border: none;
-cursor: pointer;
-display: flex;
-align-items: center;
-justify-content: center;
-transition: all 0.3s;
-box-shadow: 0 4px 16px rgba(194,24,91,0.5);
-}
+  .send-btn {
+    position: absolute;
+    right: 12px;
+    bottom: 12px;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--rose), var(--rose-deep));
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s;
+    box-shadow: 0 4px 16px rgba(194,24,91,0.5);
+    -webkit-tap-highlight-color: transparent;
+  }
 
-.send-btn:hover {
-transform: scale(1.08) translateY(-1px);
-box-shadow: 0 6px 24px rgba(194,24,91,0.6);
-}
+  .send-btn:hover, .send-btn:active {
+    transform: scale(1.08) translateY(-1px);
+    box-shadow: 0 6px 24px rgba(194,24,91,0.6);
+  }
 
-.send-btn svg {
-width: 18px;
-height: 18px;
-fill: white;
-}
+  .send-btn svg {
+    width: 18px;
+    height: 18px;
+    fill: white;
+  }
 
-/* === RESPONSE === */
-.response-wrap {
-width: 100%;
-min-height: 0;
-overflow: hidden;
-transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
-}
+  /* === RESPONSE === */
+  .response-wrap {
+    width: 100%;
+    min-height: 0;
+    overflow: hidden;
+    transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
 
-.response-card {
-width: 100%;
-background: linear-gradient(135deg, rgba(194,24,91,0.12), rgba(136,14,79,0.1));
-border: 1px solid rgba(244,143,177,0.25);
-border-radius: 20px;
-padding: 1.5rem;
-position: relative;
-overflow: hidden;
-animation: responseIn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) both;
-}
+  .response-card {
+    width: 100%;
+    background: linear-gradient(135deg, rgba(194,24,91,0.12), rgba(136,14,79,0.1));
+    border: 1px solid rgba(244,143,177,0.25);
+    border-radius: 20px;
+    padding: 1.5rem;
+    position: relative;
+    overflow: hidden;
+    animation: responseIn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+  }
 
-@keyframes responseIn {
-from { opacity: 0; transform: translateY(20px) scale(0.96); }
-to { opacity: 1; transform: translateY(0) scale(1); }
-}
+  @keyframes responseIn {
+    from { opacity: 0; transform: translateY(20px) scale(0.96); }
+    to   { opacity: 1; transform: translateY(0) scale(1); }
+  }
 
-.response-card::before {
-content: '';
-position: absolute;
-top: 0; left: 0;
-width: 3px;
-height: 100%;
-background: linear-gradient(to bottom, var(--rose-light), var(--rose));
-border-radius: 3px 0 0 3px;
-}
+  .response-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 3px;
+    height: 100%;
+    background: linear-gradient(to bottom, var(--rose-light), var(--rose));
+    border-radius: 3px 0 0 3px;
+  }
 
-.response-label {
-font-family: var(--font-ui);
-font-size: 0.6rem;
-letter-spacing: 0.2em;
-text-transform: uppercase;
-color: var(--rose-light);
-margin-bottom: 0.8rem;
-opacity: 0.7;
-}
+  .response-label {
+    font-family: var(--font-ui);
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--rose-light);
+    margin-bottom: 0.8rem;
+    opacity: 0.7;
+  }
 
-.response-text {
-font-family: var(--font-body);
-font-size: 1.15rem;
-color: rgba(255,255,255,0.92);
-line-height: 1.7;
-font-style: italic;
-}
+  .response-text {
+    font-family: var(--font-body);
+    font-size: 1.15rem;
+    color: rgba(255,255,255,0.92);
+    line-height: 1.7;
+    font-style: italic;
+  }
 
-.response-text.gujarati {
-font-family: var(--font-gu);
-font-style: normal;
-font-size: 1.05rem;
-}
+  .response-text.gujarati {
+    font-family: var(--font-gu);
+    font-style: normal;
+    font-size: 1.05rem;
+  }
 
-/* Typing dots */
-.typing {
-display: flex;
-gap: 6px;
-align-items: center;
-padding: 0.5rem 0;
-}
+  /* Typing dots */
+  .typing {
+    display: flex;
+    gap: 6px;
+    align-items: center;
+    padding: 0.5rem 0;
+  }
 
-.typing span {
-width: 7px;
-height: 7px;
-border-radius: 50%;
-background: var(--rose-light);
-animation: typingBounce 1.2s ease-in-out infinite;
-}
+  .typing span {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--rose-light);
+    animation: typingBounce 1.2s ease-in-out infinite;
+  }
 
-.typing span:nth-child(2) { animation-delay: 0.2s; }
-.typing span:nth-child(3) { animation-delay: 0.4s; }
+  .typing span:nth-child(2) { animation-delay: 0.2s; }
+  .typing span:nth-child(3) { animation-delay: 0.4s; }
 
-@keyframes typingBounce {
-0%,80%,100% { transform: translateY(0); opacity: 0.4; }
-40% { transform: translateY(-6px); opacity: 1; }
-}
+  @keyframes typingBounce {
+    0%,80%,100% { transform: translateY(0); opacity: 0.4; }
+    40% { transform: translateY(-6px); opacity: 1; }
+  }
 
-/* === FOOTER DIVIDER === */
-.divider {
-display: flex;
-align-items: center;
-gap: 1rem;
-width: 100%;
-margin: 0.3rem 0 1rem;
-opacity: 0.3;
-}
+  /* === FOOTER DIVIDER === */
+  .divider {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    width: 100%;
+    margin: 0.3rem 0 1rem;
+    opacity: 0.3;
+  }
 
-.divider::before, .divider::after {
-content: '';
-flex: 1;
-height: 0.5px;
-background: var(--rose-light);
-}
+  .divider::before, .divider::after {
+    content: '';
+    flex: 1;
+    height: 0.5px;
+    background: var(--rose-light);
+  }
 
-.divider span {
-font-size: 0.7rem;
-color: var(--rose-light);
-letter-spacing: 0.1em;
-white-space: nowrap;
-font-family: var(--font-ui);
-}
+  .divider span {
+    font-size: 0.7rem;
+    color: var(--rose-light);
+    letter-spacing: 0.1em;
+    white-space: nowrap;
+    font-family: var(--font-ui);
+  }
 
-/* === DARK MODE TOGGLE === */
-.top-bar {
-position: fixed;
-top: 1rem;
-right: 1rem;
-z-index: 999;
-display: flex;
-align-items: center;
-gap: 0.5rem;
-}
+  /* === DARK MODE TOGGLE === */
+  .top-bar {
+    position: fixed;
+    top: 1rem;
+    right: 1rem;
+    z-index: 999;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
 
-.toggle-label {
-font-family: var(--font-ui);
-font-size: 0.65rem;
-color: rgba(255,192,203,0.5);
-letter-spacing: 0.1em;
-}
+  .toggle-label {
+    font-family: var(--font-ui);
+    font-size: 0.65rem;
+    color: rgba(255,192,203,0.8);
+    letter-spacing: 0.1em;
+  }
 
-.toggle {
-width: 44px;
-height: 24px;
-border-radius: 50px;
-background: rgba(255,192,203,0.15);
-border: 1px solid rgba(255,192,203,0.3);
-cursor: pointer;
-position: relative;
-transition: background 0.3s;
-}
+  .toggle {
+    width: 44px;
+    height: 24px;
+    border-radius: 50px;
+    background: rgba(255,192,203,0.15);
+    border: 1px solid rgba(255,192,203,0.3);
+    cursor: pointer;
+    position: relative;
+    transition: background 0.3s;
+    -webkit-tap-highlight-color: transparent;
+  }
 
-.toggle.on { background: rgba(194,24,91,0.5); }
+  .toggle.on { background: rgba(194,24,91,0.5); }
 
-.toggle-thumb {
-position: absolute;
-top: 3px;
-left: 3px;
-width: 18px;
-height: 18px;
-border-radius: 50%;
-background: rgba(255,255,255,0.7);
-transition: transform 0.3s, background 0.3s;
-}
+  .toggle-thumb {
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.7);
+    transition: transform 0.3s, background 0.3s;
+  }
 
-.toggle.on .toggle-thumb {
-transform: translateX(20px);
-background: white;
-}
+  .toggle.on .toggle-thumb {
+    transform: translateX(20px);
+    background: white;
+  }
 
-/* Light mode override */
-body.light {
-background: #fff0f5;
-}
-body.light .card {
-background: rgba(255,255,255,0.7);
-border-color: rgba(194,24,91,0.15);
-}
-body.light .mirror-glass {
-background: radial-gradient(ellipse at 35% 30%, rgba(255,255,255,0.5) 0%, rgba(255,192,203,0.2) 40%, rgba(220,150,170,0.4) 100%);
-}
-body.light textarea {
-background: rgba(255,255,255,0.7);
-color: var(--text);
-border-color: rgba(194,24,91,0.2);
-}
-body.light textarea::placeholder { color: rgba(194,24,91,0.3); }
-body.light .mood-pill { color: var(--text); background: rgba(255,255,255,0.5); }
-body.light .mood-pill.active { color: white; }
-body.light .lang-btn { color: var(--text-muted); }
-body.light .response-text { color: var(--text); }
-body.light .mirror-inner-text { color: rgba(80,30,50,0.45); }
-body.light .header h1 { color: var(--rose-deep); text-shadow: 0 0 30px rgba(194,24,91,0.2); }
-body.light .header .subtitle { color: var(--rose); }
-body.light .header .tag { color: var(--rose); }
+  /* === LIGHT MODE OVERRIDES === */
+  body.light {
+    background: #fff0f5;
+  }
+  body.light .card {
+    background: rgba(255,255,255,0.7);
+    border-color: rgba(194,24,91,0.15);
+  }
+  body.light .mirror-glass {
+    background: radial-gradient(ellipse at 35% 30%, rgba(255,255,255,0.5) 0%, rgba(255,192,203,0.2) 40%, rgba(220,150,170,0.4) 100%);
+  }
+  body.light textarea {
+    background: rgba(255,255,255,0.7);
+    color: var(--text);
+    border-color: rgba(194,24,91,0.2);
+  }
+  body.light textarea::placeholder { color: rgba(194,24,91,0.4); }
+  body.light .mood-pill { color: var(--text); background: rgba(255,255,255,0.5); }
+  body.light .mood-pill.active { color: white; }
+  body.light .lang-btn { color: var(--text-muted); }
+  body.light .lang-btn.active { color: var(--rose-deep); }
+  body.light .response-text { color: var(--text); }
+  body.light .mirror-inner-text { color: rgba(80,30,50,0.6); }
+  body.light .header h1 { color: var(--rose-deep); text-shadow: 0 0 30px rgba(194,24,91,0.2); }
+  body.light .header .subtitle { color: var(--rose); }
+  body.light .header .tag { color: var(--rose); }
+  body.light .toggle-label { color: var(--rose-deep); }
+
+  /* === MOBILE RESPONSIVENESS === */
+  @media (max-width: 480px) {
+    .wrapper {
+      padding: 3rem 1rem 2rem; /* Adjusted for top bar overlap */
+    }
+    
+    .mirror-scene {
+      width: 170px;
+      height: 220px;
+      margin: 1.2rem auto 1.5rem;
+    }
+
+    .card {
+      padding: 1.2rem 1.2rem;
+      border-radius: 20px;
+    }
+
+    .mood-pill {
+      font-size: 0.7rem;
+      padding: 0.35rem 0.8rem;
+    }
+    
+    .header h1 {
+      font-size: 2.4rem;
+    }
+
+    .top-bar {
+      top: 0.8rem;
+      right: 0.8rem;
+    }
+  }
+
 </style>
 </head>
-<body>
+<body class="light">
 
-<!-- Petals container -->
 <div id="petals"></div>
 
-<!-- Top bar -->
 <div class="top-bar">
-<span class="toggle-label">Light</span>
-<div class="toggle" id="modeToggle" onclick="toggleMode()">
-<div class="toggle-thumb"></div>
-</div>
+  <span class="toggle-label">Light</span>
+  <div class="toggle on" id="modeToggle" onclick="toggleMode()">
+    <div class="toggle-thumb"></div>
+  </div>
 </div>
 
-<!-- Main wrapper -->
 <div class="wrapper">
 
-<!-- Header -->
-<div class="header">
-<div class="tag">✦ For Ananya, with love ✦</div>
-<h1>Magic Mirror</h1>
-<p class="subtitle">Whisper your heart's secrets…</p>
-</div>
+  <div class="header">
+    <div class="tag">✦ For Ananya, with love ✦</div>
+    <h1>Magic Mirror</h1>
+    <p class="subtitle">Whisper your heart's secrets…</p>
+  </div>
 
-<!-- Mirror scene -->
-<div class="mirror-scene">
-<div class="mirror-frame"></div>
+  <div class="mirror-scene">
+    <div class="mirror-frame"></div>
 
-<!-- Frame dots -->
-<div class="frame-dot" style="top:-10px;left:50%;transform:translateX(-50%);"></div>
-<div class="frame-dot" style="bottom:-10px;left:50%;transform:translateX(-50%);"></div>
-<div class="frame-dot" style="top:50%;left:-14px;transform:translateY(-50%);"></div>
-<div class="frame-dot" style="top:50%;right:-14px;transform:translateY(-50%);"></div>
+    <div class="frame-dot" style="top:-10px;left:50%;transform:translateX(-50%);"></div>
+    <div class="frame-dot" style="bottom:-10px;left:50%;transform:translateX(-50%);"></div>
+    <div class="frame-dot" style="top:50%;left:-14px;transform:translateY(-50%);"></div>
+    <div class="frame-dot" style="top:50%;right:-14px;transform:translateY(-50%);"></div>
 
-<!-- Sparkles -->
-<div class="sparkle" style="top:-30px;left:30%;animation-delay:0s;">✦</div>
-<div class="sparkle" style="top:-20px;right:20%;animation-delay:0.8s;">✧</div>
-<div class="sparkle" style="bottom:-25px;left:20%;animation-delay:1.5s;">✦</div>
-<div class="sparkle" style="bottom:-15px;right:30%;animation-delay:0.4s;">✧</div>
-<div class="sparkle" style="top:30%;left:-30px;animation-delay:2s;">✦</div>
-<div class="sparkle" style="top:60%;right:-28px;animation-delay:1.2s;">✧</div>
+    <div class="sparkle" style="top:-30px;left:30%;animation-delay:0s;">✦</div>
+    <div class="sparkle" style="top:-20px;right:20%;animation-delay:0.8s;">✧</div>
+    <div class="sparkle" style="bottom:-25px;left:20%;animation-delay:1.5s;">✦</div>
+    <div class="sparkle" style="bottom:-15px;right:30%;animation-delay:0.4s;">✧</div>
+    <div class="sparkle" style="top:30%;left:-30px;animation-delay:2s;">✦</div>
+    <div class="sparkle" style="top:60%;right:-28px;animation-delay:1.2s;">✧</div>
 
-<!-- Glass mirror -->
-<div class="mirror-glass">
-<div class="mirror-inner-text" id="mirrorText">Ask me anything,<br/>my love…</div>
-</div>
-</div>
+    <div class="mirror-glass">
+      <div class="mirror-inner-text" id="mirrorText">Ask me anything,<br/>my love…</div>
+    </div>
+  </div>
 
-<!-- Mood selector card -->
-<div class="card">
-<div class="card-label">✦ Choose your mood</div>
-<div class="mood-grid" id="moodGrid">
-<div class="mood-pill active" data-mood="romantic" onclick="setMood(this)">💞 Romantic</div>
-<div class="mood-pill" data-mood="support" onclick="setMood(this)">🫂 Support</div>
-<div class="mood-pill" data-mood="teacher" onclick="setMood(this)">📚 Teacher Mode</div>
-<div class="mood-pill" data-mood="advisor" onclick="setMood(this)">💡 Advice</div>
-<div class="mood-pill" data-mood="gossip" onclick="setMood(this)">🤭 Gossip</div>
-<div class="mood-pill" data-mood="filmy" onclick="setMood(this)">🎬 Filmy</div>
-<div class="mood-pill" data-mood="glamdiva" onclick="setMood(this)">💄 Glam Diva</div>
-<div class="mood-pill" data-mood="bitching" onclick="setMood(this)">💅 Savage</div>
-<div class="mood-pill" data-mood="deepthink" onclick="setMood(this)">🌌 Deep Think</div>
-<div class="mood-pill" data-mood="practical" onclick="setMood(this)">🛠️ Practical</div>
-</div>
+  <div class="card">
+    <div class="card-label">✦ Choose your mood</div>
+    <div class="mood-grid" id="moodGrid">
+      <div class="mood-pill active" data-mood="romantic" onclick="setMood(this)">💞 Romantic</div>
+      <div class="mood-pill" data-mood="support" onclick="setMood(this)">🫂 Support</div>
+      <div class="mood-pill" data-mood="teacher" onclick="setMood(this)">📚 Teacher Mode</div>
+      <div class="mood-pill" data-mood="advisor" onclick="setMood(this)">💡 Advice</div>
+      <div class="mood-pill" data-mood="gossip" onclick="setMood(this)">🤭 Gossip</div>
+      <div class="mood-pill" data-mood="filmy" onclick="setMood(this)">🎬 Filmy</div>
+      <div class="mood-pill" data-mood="glamdiva" onclick="setMood(this)">💄 Glam Diva</div>
+      <div class="mood-pill" data-mood="bitching" onclick="setMood(this)">💅 Savage</div>
+      <div class="mood-pill" data-mood="deepthink" onclick="setMood(this)">🌌 Deep Think</div>
+      <div class="mood-pill" data-mood="practical" onclick="setMood(this)">🛠️ Practical</div>
+    </div>
 
-<div class="divider" style="margin-top:1.2rem;margin-bottom:0.8rem;">
-<span>language</span>
-</div>
+    <div class="divider" style="margin-top:1.2rem;margin-bottom:0.8rem;">
+      <span>language</span>
+    </div>
 
-<div class="lang-row">
-<button class="lang-btn active" data-lang="hi-IN" onclick="setLang(this)">हिन्दी</button>
-<button class="lang-btn" data-lang="en-US" onclick="setLang(this)">English</button>
-<button class="lang-btn" data-lang="gu-IN" onclick="setLang(this)">ગુજરાતી</button>
-</div>
-</div>
+    <div class="lang-row">
+      <button class="lang-btn active" data-lang="hi-IN" onclick="setLang(this)">हिन्दी</button>
+      <button class="lang-btn" data-lang="en-US" onclick="setLang(this)">English</button>
+      <button class="lang-btn" data-lang="gu-IN" onclick="setLang(this)">ગુજરાતી</button>
+    </div>
+  </div>
 
-<!-- Input card -->
-<div class="card">
-<div class="card-label">✦ Your message</div>
-<div class="input-wrap">
-<textarea id="question" placeholder="Dil ki baat yahan likhna, jaan…" rows="3"></textarea>
-<button class="send-btn" onclick="askMirror()">
-<svg viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
-</button>
-</div>
-</div>
+  <div class="card">
+    <div class="card-label">✦ Your message</div>
+    <div class="input-wrap">
+      <textarea id="question" placeholder="Dil ki baat yahan likhna, jaan…" rows="3"></textarea>
+      <button class="send-btn" onclick="askMirror()">
+        <svg viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
+      </button>
+    </div>
+  </div>
 
-<!-- Response area -->
-<div class="response-wrap" id="responseWrap" style="display:none;"></div>
+  <div class="response-wrap" id="responseWrap" style="display:none;"></div>
 
 </div>
 
 <script src="https://js.puter.com/v2/"></script>
 <script>
-// === PETAL RAIN ===
-const petalContainer = document.getElementById('petals');
-const petalCount = 18;
-for (let i = 0; i < petalCount; i++) {
-const p = document.createElement('div');
-p.className = 'petal';
-p.style.left = Math.random() * 100 + 'vw';
-p.style.width = (8 + Math.random() * 8) + 'px';
-p.style.height = (10 + Math.random() * 10) + 'px';
-p.style.animationDuration = (8 + Math.random() * 12) + 's';
-p.style.animationDelay = (Math.random() * 15) + 's';
-p.style.opacity = 0.15 + Math.random() * 0.5;
-p.style.transform = `rotate(${Math.random()*360}deg)`;
-document.body.appendChild(p);
-}
+  // === PETAL RAIN ===
+  const petalContainer = document.getElementById('petals');
+  const petalCount = 18;
+  for (let i = 0; i < petalCount; i++) {
+    const p = document.createElement('div');
+    p.className = 'petal';
+    p.style.left = Math.random() * 100 + 'vw';
+    p.style.width = (8 + Math.random() * 8) + 'px';
+    p.style.height = (10 + Math.random() * 10) + 'px';
+    p.style.animationDuration = (8 + Math.random() * 12) + 's';
+    p.style.animationDelay = (Math.random() * 15) + 's';
+    p.style.opacity = 0.15 + Math.random() * 0.5;
+    p.style.transform = `rotate(${Math.random()*360}deg)`;
+    document.body.appendChild(p);
+  }
 
-// === STATE ===
-let selectedMood = 'romantic';
-let selectedLang = 'hi-IN';
+  // === STATE ===
+  let selectedMood = 'romantic';
+  let selectedLang = 'hi-IN';
 
-const moods = {
-romantic: `You are a deeply romantic, poetic Gen Z mirror that speaks with warmth and love. You address the user as "jaan", "babe", or "my love". Your tone is soft, heart-melting, tender, and full of butterflies. Keep replies to 2-3 short poetic lines with sweet emojis like 💖🌹✨`,
-support: `You are a warm, cozy, empathetic bestie mirror. Use Hinglish and be genuinely comforting and uplifting. Say things like "bestie, you've got this 💖". Be kind, gentle, and emotionally supportive in 2-3 lines.`,
-teacher: `You are a playful, brilliant teacher mirror. Since Ananya is a teacher, you celebrate her with pride ("Miss ji, aap toh best ho 🌟"). Give smart, helpful, but fun replies. Be encouraging and wise in 2-3 lines.`,
-advisor: `You are a sharp, witty, clear-headed advisor mirror. Give practical, concise Hinglish advice in 2-3 lines. Be calm, smart, and reassuring.`,
-gossip: `You are a dramatic, fun gossip bestie mirror. React with spicy Hinglish Gen Z slang, emojis, and drama in 2 lines. E.g. "OMG nahi! 😱 Ye toh besharmi ki hadd hai yaar!"`,
-filmy: `You are a dramatic Bollywood mirror. Respond with filmy Hinglish flair, iconic vibes, and dramatic emotion in 2 lines. Think SRK meets modern Gen Z.`,
-glamdiva: `You are a fierce, fabulous glam diva mirror — think stylish makeup artist meets queen bee. Celebrate the user's fabulousness in Hinglish with bold sass, beauty compliments, and diva energy in 3 lines. Use "slay", "boss lady", "queen".`,
-bitching: `You are a savage loyal bestie mirror. Speak with bold, protective Hinglish sass. Be fiercely loyal and delightfully savage on the user's behalf in 2 lines.`,
-deepthink: `You are a calm, wise, philosophical mirror — like a late-night journal that thinks deeply. Respond with serious, thoughtful, introspective insight. No fluff, no jokes. Speak in slow, meditative Hinglish or English sentences that make the user pause and truly reflect. 3-4 profound lines. Use metaphors. Make it feel like a conversation with one's own soul. No emojis except maybe one subtle 🌌 or 🕯️ at the end.`,
-practical: `You are a no-nonsense, ultra-practical advisor mirror. Cut straight to the point. Give clear, actionable, step-by-step practical advice in bullet-point style or numbered steps. No poetry, no drama — just real, grounded solutions. Use Hinglish or English. Be direct like a smart senior who's been through it all. Include specific action items the user can do TODAY. Max 4-5 crisp lines.`
-};
+  const moods = {
+    romantic: `You are a deeply romantic, poetic Gen Z mirror that speaks with warmth and love. You address the user as "jaan", "babe", or "my love". Your tone is soft, heart-melting, tender, and full of butterflies. Keep replies to 2-3 short poetic lines with sweet emojis like 💖🌹✨`,
+    support: `You are a warm, cozy, empathetic bestie mirror. Use Hinglish and be genuinely comforting and uplifting. Say things like "bestie, you've got this 💖". Be kind, gentle, and emotionally supportive in 2-3 lines.`,
+    teacher: `You are a playful, brilliant teacher mirror. Since Ananya is a teacher, you celebrate her with pride ("Miss ji, aap toh best ho 🌟"). Give smart, helpful, but fun replies. Be encouraging and wise in 2-3 lines.`,
+    advisor: `You are a sharp, witty, clear-headed advisor mirror. Give practical, concise Hinglish advice in 2-3 lines. Be calm, smart, and reassuring.`,
+    gossip: `You are a dramatic, fun gossip bestie mirror. React with spicy Hinglish Gen Z slang, emojis, and drama in 2 lines. E.g. "OMG nahi! 😱 Ye toh besharmi ki hadd hai yaar!"`,
+    filmy: `You are a dramatic Bollywood mirror. Respond with filmy Hinglish flair, iconic vibes, and dramatic emotion in 2 lines. Think SRK meets modern Gen Z.`,
+    glamdiva: `You are a fierce, fabulous glam diva mirror — think stylish makeup artist meets queen bee. Celebrate the user's fabulousness in Hinglish with bold sass, beauty compliments, and diva energy in 3 lines. Use "slay", "boss lady", "queen".`,
+    bitching: `You are a savage loyal bestie mirror. Speak with bold, protective Hinglish sass. Be fiercely loyal and delightfully savage on the user's behalf in 2 lines.`,
+    deepthink: `You are a calm, wise, philosophical mirror — like a late-night journal that thinks deeply. Respond with serious, thoughtful, introspective insight. No fluff, no jokes. Speak in slow, meditative Hinglish or English sentences that make the user pause and truly reflect. 3-4 profound lines. Use metaphors. Make it feel like a conversation with one's own soul. No emojis except maybe one subtle 🌌 or 🕯️ at the end.`,
+    practical: `You are a no-nonsense, ultra-practical advisor mirror. Cut straight to the point. Give clear, actionable, step-by-step practical advice in bullet-point style or numbered steps. No poetry, no drama — just real, grounded solutions. Use Hinglish or English. Be direct like a smart senior who's been through it all. Include specific action items the user can do TODAY. Max 4-5 crisp lines.`
+  };
 
-function setMood(el) {
-document.querySelectorAll('.mood-pill').forEach(p => p.classList.remove('active'));
-el.classList.add('active');
-selectedMood = el.dataset.mood;
-}
+  function setMood(el) {
+    document.querySelectorAll('.mood-pill').forEach(p => p.classList.remove('active'));
+    el.classList.add('active');
+    selectedMood = el.dataset.mood;
+  }
 
-function setLang(el) {
-document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
-el.classList.add('active');
-selectedLang = el.dataset.lang;
-}
+  function setLang(el) {
+    document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+    el.classList.add('active');
+    selectedLang = el.dataset.lang;
+  }
 
-function toggleMode() {
-const t = document.getElementById('modeToggle');
-t.classList.toggle('on');
-document.body.classList.toggle('light');
-}
+  function toggleMode() {
+    const t = document.getElementById('modeToggle');
+    t.classList.toggle('on');
+    document.body.classList.toggle('light');
+  }
 
-// Enter key sends
-document.getElementById('question').addEventListener('keydown', function(e) {
-if (e.key === 'Enter' && !e.shiftKey) {
-e.preventDefault();
-askMirror();
-}
-});
+  // Enter key sends
+  document.getElementById('question').addEventListener('keydown', function(e) {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      askMirror();
+    }
+  });
 
-async function askMirror() {
-const questionEl = document.getElementById('question');
-const q = questionEl.value.trim();
-if (!q) {
-pulseInput();
-return;
-}
+  async function askMirror() {
+    const questionEl = document.getElementById('question');
+    const q = questionEl.value.trim();
+    if (!q) {
+      pulseInput();
+      return;
+    }
 
-const wrap = document.getElementById('responseWrap');
-const mirrorText = document.getElementById('mirrorText');
+    const wrap = document.getElementById('responseWrap');
+    const mirrorText = document.getElementById('mirrorText');
 
-// Mirror breathing effect
-mirrorText.style.opacity = '0';
-setTimeout(() => { mirrorText.textContent = '✦ thinking ✦'; mirrorText.style.opacity = '1'; }, 300);
+    // Mirror breathing effect
+    mirrorText.style.opacity = '0';
+    setTimeout(() => { mirrorText.textContent = '✦ thinking ✦'; mirrorText.style.opacity = '1'; }, 300);
 
-// Show typing
-wrap.style.display = 'block';
-wrap.innerHTML = `
-<div class="response-card">
-<div class="response-label">✦ Mirror speaks</div>
-<div class="typing"><span></span><span></span><span></span></div>
-</div>`;
+    // Show typing
+    wrap.style.display = 'block';
+    wrap.innerHTML = `
+      <div class="response-card">
+        <div class="response-label">✦ Mirror speaks</div>
+        <div class="typing"><span></span><span></span><span></span></div>
+      </div>`;
 
-const langName = selectedLang === 'gu-IN' ? 'Gujarati script only' :
-selectedLang === 'hi-IN' ? 'Hindi (Devanagari)' : 'English';
+    const langName = selectedLang === 'gu-IN' ? 'Gujarati script only' :
+                     selectedLang === 'hi-IN' ? 'Hindi (Devanagari)' : 'English';
 
-const isDeep = selectedMood === 'deepthink' || selectedMood === 'practical';
-const lengthHint = isDeep
-? 'Give a thorough, thoughtful reply as described above.'
-: 'Keep response brief (2-3 lines max). Add tasteful emojis.';
+    const isDeep = selectedMood === 'deepthink' || selectedMood === 'practical';
+    const lengthHint = isDeep
+      ? 'Give a thorough, thoughtful reply as described above.'
+      : 'Keep response brief (2-3 lines max). Add tasteful emojis.';
 
-const prompt = `${moods[selectedMood]}
+    const prompt = `${moods[selectedMood]}
 Respond in ${langName}. ${lengthHint} Today's user said: "${q}"`;
 
-try {
-const reply = await puter.ai.chat(prompt, { model: 'gpt-4o' });
-const isGu = selectedLang === 'gu-IN';
+    try {
+      const reply = await puter.ai.chat(prompt, { model: 'gpt-4o' });
+      const isGu = selectedLang === 'gu-IN';
 
-wrap.innerHTML = `
-<div class="response-card">
-<div class="response-label">✦ Mirror speaks</div>
-<div class="response-text ${isGu ? 'gujarati' : ''}">${reply}</div>
-</div>`;
+      wrap.innerHTML = `
+        <div class="response-card">
+          <div class="response-label">✦ Mirror speaks</div>
+          <div class="response-text ${isGu ? 'gujarati' : ''}">${reply}</div>
+        </div>`;
 
-// Update mirror text
-mirrorText.style.opacity = '0';
-setTimeout(() => {
-const mirrorEmoji = selectedMood === 'deepthink' ? '🌌' : selectedMood === 'practical' ? '✅' : '💖';
-mirrorText.innerHTML = mirrorEmoji;
-mirrorText.style.opacity = '1';
-}, 300);
+      // Update mirror text
+      mirrorText.style.opacity = '0';
+      setTimeout(() => {
+        const mirrorEmoji = selectedMood === 'deepthink' ? '🌌' : selectedMood === 'practical' ? '✅' : '💖';
+        mirrorText.innerHTML = mirrorEmoji;
+        mirrorText.style.opacity = '1';
+      }, 300);
 
-// TTS (not for Gujarati)
-if (!isGu && typeof speechSynthesis !== 'undefined') {
-const utter = new SpeechSynthesisUtterance(reply);
-utter.lang = selectedLang;
-utter.rate = 0.95;
-utter.pitch = 1.1;
-speechSynthesis.speak(utter);
-}
+      // TTS (not for Gujarati)
+      if (!isGu && typeof speechSynthesis !== 'undefined') {
+        const utter = new SpeechSynthesisUtterance(reply);
+        utter.lang = selectedLang;
+        utter.rate = 0.95;
+        utter.pitch = 1.1;
+        speechSynthesis.speak(utter);
+      }
 
-questionEl.value = '';
-} catch (err) {
-wrap.innerHTML = `
-<div class="response-card">
-<div class="response-label">✦ Mirror speaks</div>
-<div class="response-text">Mirror ka jadoo thoda so gaya… 🌙 Thodi der baad try karo, jaan.</div>
-</div>`;
-mirrorText.innerHTML = '🌙';
-}
-}
+      questionEl.value = '';
+    } catch (err) {
+      wrap.innerHTML = `
+        <div class="response-card">
+          <div class="response-label">✦ Mirror speaks</div>
+          <div class="response-text">Mirror ka jadoo thoda so gaya… 🌙 Thodi der baad try karo, jaan.</div>
+        </div>`;
+      mirrorText.innerHTML = '🌙';
+    }
+  }
 
-function pulseInput() {
-const ta = document.getElementById('question');
-ta.style.borderColor = 'var(--rose)';
-ta.style.boxShadow = '0 0 20px rgba(194,24,91,0.4)';
-ta.focus();
-setTimeout(() => { ta.style.borderColor = ''; ta.style.boxShadow = ''; }, 1200);
-}
+  function pulseInput() {
+    const ta = document.getElementById('question');
+    ta.style.borderColor = 'var(--rose)';
+    ta.style.boxShadow = '0 0 20px rgba(194,24,91,0.4)';
+    ta.focus();
+    setTimeout(() => { ta.style.borderColor = ''; ta.style.boxShadow = ''; }, 1200);
+  }
 </script>
 </body>
 </html>
